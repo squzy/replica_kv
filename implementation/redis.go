@@ -10,6 +10,10 @@ type redis_kv struct {
 	client *redis.Client
 }
 
+func (r *redis_kv) Remove(key string) error {
+	return r.client.Del(key).Err()
+}
+
 func (r *redis_kv) Set(key, value string, duration time.Duration) error {
 	return r.client.Set(key, value, duration).Err()
 }
